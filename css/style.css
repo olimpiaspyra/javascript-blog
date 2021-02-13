@@ -96,11 +96,12 @@ body {
 
 .post {
   opacity: 0;
+  padding-right: 20px;
 }
 
 .post.active {
   opacity: 1;
-  transition: 1.5s;
+  transition: 1s;
   position: absolute;
   z-index: 1;
   top: 20px;
