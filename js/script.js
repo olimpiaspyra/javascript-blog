@@ -54,7 +54,7 @@
     optTitleSelector = '.post-title',
     optTitleListSelector = '.titles';
 
-  function generateTitleLinks() {
+  function generateTitleLinks () { // eslint-disable-line no-inner-declarations
     /* [DONE] remove contents of titleList */
 
     const titleList = document.querySelector(optTitleListSelector);
@@ -104,6 +104,5 @@
       link.addEventListener('click', titleClickHandler);
     }
   }
-
   generateTitleLinks();
 }
