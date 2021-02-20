@@ -114,9 +114,9 @@
 
   function generateTags(){ // eslint-disable-line no-inner-declarations
 
-    /* [NEW] create a new variable allTags with an empty array */
+    /* [NEW] create a new variable allTags with an empty object */
 
-    let allTags = [];
+    let allTags = {};
 
     /* [DONE] find all articles */
 
@@ -162,11 +162,13 @@
 
         /* [NEW] check if this link is NOT already in allTags */
 
-        if (allTags.indexOf(linkHTML) == -1) {
+        if (!allTags[tag]) {
 
-          /* [NEW] add generated code to allTags array */
+          /* [NEW] add tag to allTags object */
 
-          allTags.push(linkHTML);
+          allTags[tag] = 1;
+        } else {
+          allTags[tag]++;
         }
 
         /* [DONE] END LOOP: for each tag */
@@ -184,9 +186,29 @@
 
     const tagList = document.querySelector('.tags');
 
-    /* [NEW] add html from allTags to tagList */
+    // /* [NEW] add html from allTags to tagList */
 
-    tagList.innerHTML = allTags.join(' ');
+    // tagList.innerHTML = allTags.join(' ');
+    console.log ('all tags:', allTags);
+
+    /* [NEW] create variable for all links HTML code */
+
+    let allTagsHTML = '';
+
+    /* [NEW] START LOOP: for each tag in allTags: */
+
+    for (let tag in allTags){
+
+      /* [NEW] generate code of a link and add it to allTagsHTML */
+
+      allTagsHTML += `<li><a href="#tag-${tag}"><span>${tag}</span></a>${' '}${allTags[tag]}</li>${' '}`;
+    }
+    /* [NEW] END LOOP: for each tag in allTags: */
+
+    /*[NEW] add HTML from allTagsHTML to tagList */
+
+    tagList.innerHTML = allTagsHTML;
+
   }
 
   generateTags();
