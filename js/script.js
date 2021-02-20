@@ -268,6 +268,33 @@
 
   function authorClickHandler(event) { // eslint-disable-line no-inner-declarations
 
+    event.preventDefault();
+    const clickedElement = this;
+    console.log('Author was clicked');
+
+    const href = clickedElement.getAttribute('href');
+    console.log('href:', href);
+
+    const author = href.replace('#author-', '');
+
+    const activeAuthorLinks = document.querySelectorAll ('a.active[href^="#author-"]');
+    console.log ('active author links:', activeAuthorLinks);
+
+    for (let activeAuthorLink of activeAuthorLinks) {
+
+      activeAuthorLink.classList.remove('active');
+
+    }
+
+    const authorLinks = document.querySelectorAll('a[href="' + href + '"]');
+
+    for (let authorLink of authorLinks) {
+
+      authorLink.classList.add('active');
+
+    }
+
+    generateTitleLinks('[data-author="' + '"]');
   }
 
   function addClickListenerToAuthors () { // eslint-disable-line no-inner-declarations
