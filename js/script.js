@@ -204,7 +204,7 @@
 
     /* [DONE] find all tag links with "href" attribute equal to the "href" constant */
 
-    const tagLinks = document.querySelector('a[href="' + href + '"]');
+    const tagLinks = document.querySelectorAll('a[href="' + href + '"]');
 
     /* [DONE] START LOOP: for each found tag link */
 
@@ -222,13 +222,21 @@
   }
 
   function addClickListenersToTags(){ // eslint-disable-line no-inner-declarations
-    /* find all links to tags */
 
-    /* START LOOP: for each link */
+    /* [DONE] find all links to tags */
 
-    /* add tagClickHandler as event listener for that link */
+    const tagLinks = document.querySelectorAll('a[href^="#tag-"]');
 
-    /* END LOOP: for each link */
+    /* [DONE] START LOOP: for each link */
+
+    for (let tagLink of tagLinks) {
+
+      /* [DONE] add tagClickHandler as event listener for that link */
+
+      tagLink.addEventListener('click', tagClickHandler);
+
+    /* [DONE] END LOOP: for each link */
+    }
   }
 
   addClickListenersToTags();
