@@ -191,6 +191,9 @@
     // tagList.innerHTML = allTags.join(' ');
     console.log ('all tags:', allTags);
 
+    const tagsParams = calculateTagsParams(allTags);
+    console.log ('tagsParams:', tagsParams);
+
     /* [NEW] create variable for all links HTML code */
 
     let allTagsHTML = '';
@@ -208,6 +211,29 @@
     /*[NEW] add HTML from allTagsHTML to tagList */
 
     tagList.innerHTML = allTagsHTML;
+
+  }
+
+  function calculateTagsParams (tags) { // eslint-disable-line no-inner-declarations
+
+    const params = {
+      max: 0,
+      min: 999999,
+    };
+
+    for (let tag in tags) {
+
+      if (tags[tag] > params.max) {
+        params.max = tags[tag];
+      }
+
+      if (tags[tag] < params.min) {
+        params.min = tags[tag];
+      }
+      console.log (tag + ' is used' + tags[tag] + ' times ');
+    }
+
+    return params;
 
   }
 
