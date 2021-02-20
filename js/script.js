@@ -52,9 +52,9 @@
 
   const optArticleSelector = '.post',
     optTitleSelector = '.post-title',
-    optTitleListSelector = '.titles';
-  optArticleTagsSelector = '.post-tags .list';
-  optArticleAuthorSelector = '.post-author';
+    optTitleListSelector = '.titles',
+    optArticleTagsSelector = '.post-tags .list',
+    optArticleAuthorSelector = '.post-author';
 
   function generateTitleLinks (customSelector = '') { // eslint-disable-line no-inner-declarations
     console.log('custom selector:', customSelector);
@@ -219,7 +219,7 @@
     }
     /* [DONE] execute function "generateTitleLinks" with article selector as argument */
 
-    generateTitleLinks('[data-tags~="' + '"]');
+    generateTitleLinks('[data-tags~="' + tag + '"]');
   }
 
   function addClickListenersToTags(){ // eslint-disable-line no-inner-declarations
@@ -247,7 +247,7 @@
     const articles = document.querySelectorAll(optArticleSelector);
 
     for (let article of articles) {
-      const author = article.querySelector(optArticleAuthorSelector);
+      const authorList = article.querySelector(optArticleAuthorSelector);
 
       let html= '';
 
@@ -261,9 +261,10 @@
       html = html + linkHTML;
       console.log('variables author:', html);
 
-      articleAuthor.innerHTML = html;
+      authorList.innerHTML = html;
     }
   }
+
   generateAuthors();
 
   function authorClickHandler(event) { // eslint-disable-line no-inner-declarations
@@ -294,7 +295,7 @@
 
     }
 
-    generateTitleLinks('[data-author="' + '"]');
+    generateTitleLinks('[data-author="' + author + '"]');
   }
 
   function addClickListenerToAuthors () { // eslint-disable-line no-inner-declarations
@@ -306,7 +307,7 @@
       authorLink.addEventListener('click', authorClickHandler);
     }
   }
-  addClickListenerToAuthors();
 
+  addClickListenerToAuthors();
 
 }
