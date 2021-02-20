@@ -265,4 +265,21 @@
     }
   }
   generateAuthors();
+
+  function authorClickHandler(event) { // eslint-disable-line no-inner-declarations
+
+  }
+
+  function addClickListenerToAuthors () { // eslint-disable-line no-inner-declarations
+
+    const authorLinks = document.querySelectorAll('a[href^="#author-"]');
+
+    for (let authorLink of authorLinks) {
+
+      authorLink.addEventListener('click', authorClickHandler);
+    }
+  }
+  addClickListenerToAuthors();
+
+
 }
