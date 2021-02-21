@@ -55,7 +55,9 @@
     optTitleListSelector = '.titles',
     optArticleTagsSelector = '.post-tags .list',
     optArticleAuthorSelector = '.post-author',
-    optTagsListSelector = '.tags .list';
+    optTagsListSelector = '.tags .list',
+    optCloudClassCount = 5,
+    optCloudClassPrefix = 'tag-size-';
 
   function generateTitleLinks (customSelector = '') { // eslint-disable-line no-inner-declarations
     console.log('custom selector:', customSelector);
@@ -111,6 +113,16 @@
     }
   }
   generateTitleLinks();
+
+  function calculateTagClass (count, params) {// eslint-disable-line no-inner-declarations
+
+    const normalizedCount = count - params.min;
+    const normalizedMax = params.max - params.min;
+    const percentage = normalizedCount / normalizedMax;
+    const classNumber = Math.floor( percentage * (optCloudClassCount - 1) + 1 );
+
+    return optCloudClassPrefix + classNumber;
+  }
 
   function generateTags(){ // eslint-disable-line no-inner-declarations
 
@@ -189,7 +201,7 @@
     // /* [NEW] add html from allTags to tagList */
 
     // tagList.innerHTML = allTags.join(' ');
-    console.log ('all tags:', allTags);
+    // console.log ('all tags:', allTags);
 
     const tagsParams = calculateTagsParams(allTags);
     console.log ('tagsParams:', tagsParams);
@@ -204,7 +216,11 @@
 
       /* [NEW] generate code of a link and add it to allTagsHTML */
 
-      allTagsHTML += `<li><a href="#tag-${tag}"><span>${tag}</span></a>${' '}${allTags[tag]}</li>${' '}`;
+      // allTagsHTML += `<li><a href="#tag-${tag}"><span>${tag}</span></a>${' '}${allTags[tag]}</li>${' '}`;
+
+      allTagsHTML += '<li><a href="#tag-' + tag + '" class="' + calculateTagClass(allTags[tag], tagsParams) + '"><span>' + tag + ' </span></a></li>';
+      console.log('allTagsHTML: ', allTagsHTML);
+
     }
     /* [NEW] END LOOP: for each tag in allTags: */
 
@@ -230,7 +246,7 @@
       if (tags[tag] < params.min) {
         params.min = tags[tag];
       }
-      console.log (tag + ' is used' + tags[tag] + ' times ');
+      console.log (tag + ' is used ' + tags[tag] + ' times ');
     }
 
     return params;
